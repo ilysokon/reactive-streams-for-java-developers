@@ -42,7 +42,7 @@ import static akka.stream.Attributes.createLogLevels;
 import static java.util.stream.Collectors.averagingDouble;
 import static java.util.stream.Collectors.toList;
 
-public class CsvProcessor {
+public class CsvProcessor2 {
 
   private static final Config config = ConfigFactory.load();
   private static final Path DATA_DIR = Paths.get(config.getString("csv-processor.data-dir"));
