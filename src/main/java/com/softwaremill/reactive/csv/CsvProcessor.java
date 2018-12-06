@@ -1,13 +1,20 @@
 package com.softwaremill.reactive.csv;
 
+import akka.Done;
 import akka.NotUsed;
+import akka.actor.ActorRef;
+import akka.event.Logging;
 import akka.http.javadsl.model.ws.Message;
 import akka.http.javadsl.model.ws.TextMessage;
 import akka.http.javadsl.server.HttpApp;
 import akka.http.javadsl.server.Route;
 import akka.japi.Pair;
+import akka.stream.ActorMaterializer;
+import akka.stream.Attributes;
 import akka.stream.FlowShape;
 import akka.stream.Graph;
+import akka.stream.Materializer;
+import akka.stream.OverflowStrategy;
 import akka.stream.SinkShape;
 import akka.stream.ThrottleMode;
 import akka.stream.UniformFanOutShape;
@@ -119,6 +126,23 @@ public class CsvProcessor {
     CsvProcessor csvProcessor = new CsvProcessor();
     Server server = new Server(csvProcessor.liveReadings);
     server.startServer(config.getString("server.host"), config.getInt("server.port"));
+  }
+
+//  Materializer materializer = ActorMaterializer.create(getContext());
+//  private void startStream() {
+//    ActorRef subscriber = Source.<Double>actorRef(Integer.MAX_VALUE, OverflowStrategy.fail())
+//            .withAttributes(Attributes.createLogLevels(Logging.DebugLevel(), Logging.InfoLevel(), Logging.ErrorLevel()))
+//            .log("Consumed")
+//            .mapAsync(1, event -> proxyAcquirer.execute(event.getProxyAcquirerEnvelope()))
+//            .log("Proxy Acquirer Response")
+//            .to(Sink.onComplete(done -> tellDone()))
+//            .run(materializer);
+//    context().system().eventStream().subscribe(subscriber, ProxyAcquirerCompensationEvent.class);
+//  }
+
+  private void tellDone() {
+//    log().warning("Stream restarted!");
+//    startStream();
   }
 }
 
