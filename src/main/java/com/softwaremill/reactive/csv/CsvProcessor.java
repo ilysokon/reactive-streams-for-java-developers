@@ -1,4 +1,4 @@
-package com.softwaremill.reactive;
+package com.softwaremill.reactive.csv;
 
 import akka.NotUsed;
 import akka.http.javadsl.model.ws.Message;
@@ -42,7 +42,7 @@ import static akka.stream.Attributes.createLogLevels;
 import static java.util.stream.Collectors.averagingDouble;
 import static java.util.stream.Collectors.toList;
 
-public class CsvProcessor2 {
+public class CsvProcessor {
 
   private static final Config config = ConfigFactory.load();
   private static final Path DATA_DIR = Paths.get(config.getString("csv-processor.data-dir"));
